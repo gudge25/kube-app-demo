@@ -1,0 +1,21 @@
+kubectl cluster-info
+kubectl get pods -o wide -A  
+
+#Start and  Delete pods
+kubectl run hello --image=asterisktech/myk3sapp --port=80
+kubectl delete pods hello 
+
+#Desc
+kubectl describe pod hello 
+
+#Run
+kubectl exec hello -- apt upgrade -y
+
+#Connect and run BASH
+kubectl exec -it hello -- bash                                                                                                                                                        23-08-08 - 23:15:32
+
+#Logs
+kubectl logs hello
+
+#Rort forvarse
+kubectl  port-forward  hello 4435:80
