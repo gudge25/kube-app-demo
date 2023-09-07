@@ -19,3 +19,39 @@ kubectl logs hello
 
 #Rort forvarse
 kubectl  port-forward  hello 4435:80
+
+#Create POD
+kubectl run nginx --image=nginx
+
+#Expose(Create service)
+kubectl expose pod example-pod --port=80 --name example-pod
+
+#delete Service
+kubectl delete service example-pod 
+
+#API resources list
+kubectl api-resources
+
+# Get the documentation of the resource and its fields
+kubectl explain pods
+  
+# Get the documentation of a specific field of a resource
+kubectl explain pods.spec.containers
+
+#logs follow
+kubectl logs -f blue
+
+#Logs with labels
+kubectl logs -l app=blue-green
+ 
+#Shell
+kubectl exec -ti blue /bin/sh
+
+#Top
+kubectl top pods
+
+# dun temporary  Pod to debug
+kubectl run -it --rm debug-pod --image=arm64v8/alpine -- /bin/sh
+
+# export creation of config map to file (dry-run means just create a file fut not aapy it)
+kubectl create configmap website --from-file=index.html --dry-run -o yaml > configmap.yaml

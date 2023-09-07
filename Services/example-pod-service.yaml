@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-pod
+spec:
+  type: ClusterIP #   ClusterIP inside  cluster or NodePort - randon port outside
+  ports:
+    - port: 8080
+      targetPort: 80
+  selector:
+    app: example-pod

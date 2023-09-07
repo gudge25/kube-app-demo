@@ -2,9 +2,18 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: example-pod
+  labels:
+    app: example-pod
 spec:
   containers:
-    - name: nginx-container
-      image: nginx:latest
+    - name: apache-container
+      image: asterisktech/myk3sapp:1.01
+      resources:
+        requests:
+          cpu: "250m" # quater of CPU
+          memory: "64Mi"   # requesting at least 64MiB
+        limits:
+          cpu: "500m"    # limit the maximum CPU usage a half core(s) per container.
+          memory: "128Mi"     # limit the max amount of memory available for this container
       ports:
         - containerPort: 80

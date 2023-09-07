@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: fetch
+spec: 
+  schedule: "*/5 * * * *" # every 5 minutes, starting now.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: fetch
+              image: arm64v8/alpine
+              command: ["/bin/sh",  "-c", "wget http://blue-green"]
+          restartPolicy: Never 

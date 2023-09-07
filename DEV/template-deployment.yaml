@@ -6,7 +6,8 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 1
+# do not include replicas in the manifests if you want replicas to be controlled by HPA
+  #replicas: 1
   selector:
     matchLabels:
       app: nginx
