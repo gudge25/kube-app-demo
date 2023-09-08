@@ -55,3 +55,28 @@ kubectl run -it --rm debug-pod --image=arm64v8/alpine -- /bin/sh
 
 # export creation of config map to file (dry-run means just create a file fut not aapy it)
 kubectl create configmap website --from-file=index.html --dry-run -o yaml > configmap.yaml
+
+#attach Debug container  inside pod (if there is no bash or sh avail)
+kubectl debug ${PODNAME} --attach
+
+#Usefull  small image for net debug
+kubectl run --rm  -it net-debug5 --image=nixery.dev/shell/git/htop/wget/curl /bin/bash 
+
+#Wireshark shiff
+kubectl sniff nginx-84bfb9bc8-72h6w  #-p
+
+#Skaffold contiliously deploy  your application  
+https://skaffold.dev/  
+
+#Local development for Kubernetes
+https://mirrord.dev/
+https://www.telepresence.io/
+
+#Easy  install k3s
+https://github.com/alexellis/k3sup
+
+#API ref
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/
+
+#kubectl Cheat Sheet
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
