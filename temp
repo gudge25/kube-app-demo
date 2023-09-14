@@ -1,0 +1,13 @@
+curl --request GET \
+	--url 'https://meteostat.p.rapidapi.com/stations/nearby?lat=52.229675&lon=21.012230&limit=5' \
+	--header 'x-rapidapi-host: meteostat.p.rapidapi.com' \
+	--header 'x-rapidapi-key: 0ca5faabdfmsh40716acf1c38949p1185e8jsnd63631a0efa8'
+
+
+
+ID=12375
+
+curl --request GET \
+	--url 'https://meteostat.p.rapidapi.com/stations/daily?station=12375&start=2023-09-10&end=2023-09-10' \
+	--header 'x-rapidapi-host: meteostat.p.rapidapi.com' \
+	--header 'x-rapidapi-key: 0ca5faabdfmsh40716acf1c38949p1185e8jsnd63631a0efa'
