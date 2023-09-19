@@ -77,7 +77,7 @@ spec:
   - port: 80
   selector:
     app: nginx
-  type: LoadBalancer
+  #type: LoadBalancer
 ---
 apiVersion: v1
 kind: ConfigMap
