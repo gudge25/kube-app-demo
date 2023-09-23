@@ -78,36 +78,3 @@ spec:
   selector:
     app: nginx
   #type: LoadBalancer
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: my-configmap
-data:
-  index.html: |
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Anton's Page</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                text-align: center;
-                margin: 50px;
-            }
-
-            h1 {
-                color: #4CAF50;
-            }
-        </style>
-    </head>
-
-    <body>
-        <h1>Welcome, Anton!</h1>
-        <p>This is your personalized page.</p>
-    </body>
-
-    </html>
