@@ -1,0 +1,10 @@
+# Usefull for  k3s  to enable use self sighed sert of back apps
+# apiVersion: helm.cattle.io/v1
+# kind: HelmChartConfig
+# metadata:
+#   name: traefik
+#   namespace: kube-system
+# spec:
+#   valuesContent: |-
+#     globalArguments:
+#     - "--serversTransport.insecureSkipVerify=true"

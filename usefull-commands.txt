@@ -61,6 +61,7 @@ kubectl debug ${PODNAME} --attach
 
 #Usefull  small image for net debug
 kubectl run --rm  -it net-debug5 --image=nixery.dev/shell/git/htop/wget/curl /bin/bash 
+kubectl run --rm  -it net-debug5 --image=nixery.dev/arm64/shell/git/htop/wget/curl /bin/bash  #arm64
 
 #Wireshark shiff
 kubectl sniff nginx-84bfb9bc8-72h6w  #-p
