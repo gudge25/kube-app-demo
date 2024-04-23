@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redash-server
+spec:
+  selector:
+    app: redash
+    component: server
+  ports:
+    - protocol: TCP
+      port: __PORT__
+      targetPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redash-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redash
+      component: server
+  template:
+    metadata:
+      labels:
+        app: redash
+        component: server
+    spec:
+      containers:
+        - name: redash-server
+          image: redash/redash:preview
+          envFrom:
+            - configMapRef:
+                name: redash-env
+          ports:
+            - containerPort: 5000
+          env:
+            - name: REDASH_WEB_WORKERS
+              value: "4"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redash-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redash
+      component: scheduler
+  template:
+    metadata:
+      labels:
+        app: redash
+        component: scheduler
+    spec:
+      containers:
+        - name: redash-scheduler
+          image: redash/redash:preview
+          envFrom:
+            - configMapRef:
+                name: redash-env
+          command: ["scheduler"]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redash-scheduled-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redash
+      component: scheduled-worker
+  template:
+    metadata:
+      labels:
+        app: redash
+        component: scheduled-worker
+    spec:
+      containers:
+        - name: redash-scheduled-worker
+          image: redash/redash:preview
+          envFrom:
+            - configMapRef:
+                name: redash-env
+          command: ["worker"]
+          env:
+            - name: QUEUES
+              value: "scheduled_queries,schemas"
+            - name: WORKERS_COUNT
+              value: "1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redash-adhoc-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redash
+      component: adhoc-worker
+  template:
+    metadata:
+      labels:
+        app: redash
+        component: adhoc-worker
+    spec:
+      containers:
+        - name: redash-adhoc-worker
+          image: redash/redash:preview
+          envFrom:
+            - configMapRef:
+                name: redash-env
+          command: ["worker"]
+          env:
+            - name: QUEUES
+              value: "queries"
+            - name: WORKERS_COUNT
+              value: "2"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redash-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redash
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: redash
+        component: worker
+    spec:
+      containers:
+        - name: redash-worker
+          image: redash/redash:preview
+          envFrom:
+            - configMapRef:
+                name: redash-env
+          command: ["worker"]
+          env:
+            - name: QUEUES
+              value: "periodic,emails,default"
+            - name: WORKERS_COUNT
+              value: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redash-nginx
+spec:
+  selector:
+    app: redash
+    component: server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redash-env
+data:
+  REDASH_DATABASE_URL: "postgresql://<username>:<password>@<postgres-host>:<postgres-port>/<database>"
+  REDASH_REDIS_URL: "redis://<redis-host>:<redis-port>/0"
+  REDASH_COOKIE_SECRET: "<cookie-secret>"
