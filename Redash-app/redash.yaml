@@ -8,7 +8,7 @@ spec:
     component: server
   ports:
     - protocol: TCP
-      port: __PORT__
+      port: 5000
       targetPort: 5000
 ---
 apiVersion: apps/v1
