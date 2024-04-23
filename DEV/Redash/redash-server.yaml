@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redash-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redash
+      component: server
+  template:
+    metadata:
+      labels:
+        app: redash
+        component: server
+    spec:
+      containers:
+        - name: redash-server
+          image: redash/redash:__TAG__
+          envFrom:
+            - configMapRef:
+                name: redash-env
+          ports:
+            - containerPort: 5000
+          env:
+            - name: REDASH_WEB_WORKERS
+              value: "4"
