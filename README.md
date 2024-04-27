@@ -13,5 +13,7 @@ helm install rancher rancher-latest/rancher   --namespace cattle-system   --set 
 ```
 
 # Add worker node
+```
 /usr/local/bin/k3s-agent-uninstall.sh  (Optional)
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.28.9+k3s1 K3S_URL=https://IP.oraclevcn.com:6443 K3S_TOKEN=12345678 sh -
+```
