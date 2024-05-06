@@ -26,6 +26,8 @@ spec:
       containers:
         - image: docker.n8n.io/n8nio/n8n
           name: n8n
+          securityContext:
+            runAsUser: 1000 # Assuming 1000 is the appropriate UID for the process inside the container
           ports:
             - containerPort: 5678
               hostPort: 5678
@@ -41,3 +43,5 @@ spec:
         - name: n8n-data
           persistentVolumeClaim:
             claimName: n8n-data
+          # Optionally, you can specify volume permissions here
+          # volumeMode: "0700" # Example permissions
