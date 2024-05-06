@@ -35,6 +35,7 @@ spec:
           volumeMounts:
             - mountPath: /home/node/.n8n
               name: n8n-data
+              readOnly: false # Set to true if appropriate
       restartPolicy: Always
       volumes:
         - name: n8n-data
