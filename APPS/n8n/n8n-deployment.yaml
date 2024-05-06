@@ -44,4 +44,4 @@ spec:
           persistentVolumeClaim:
             claimName: n8n-data
           # Optionally, you can specify volume permissions here
-          # volumeMode: "0700" # Example permissions
+          volumeMode: "0777" # Example permissions
