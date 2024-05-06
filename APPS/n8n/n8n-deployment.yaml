@@ -34,14 +34,14 @@ spec:
               protocol: TCP
           stdin: true
           tty: true
-          volumeMounts:
-            - mountPath: /home/node/.n8n
-              name: n8n-data
-              readOnly: false # Set to true if appropriate
+          # volumeMounts:
+          #   - mountPath: /home/node/.n8n
+          #     name: n8n-data
+          #     readOnly: false # Set to true if appropriate
       restartPolicy: Always
-      volumes:
-        - name: n8n-data
-          persistentVolumeClaim:
-            claimName: n8n-data
-          # Optionally, you can specify volume permissions here
-          volumeMode: "0777" # Example permissions
+      # volumes:
+      #   - name: n8n-data
+      #     persistentVolumeClaim:
+      #       claimName: n8n-data
+      #     # Optionally, you can specify volume permissions here
+      #     volumeMode: "0777" # Example permissions
