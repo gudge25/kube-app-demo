@@ -29,8 +29,8 @@ spec:
           value: "Europe/Warsaw"
         - name: WEBHOOK_URL
           value: "https://n8n.lab.gixo.co.uk/"
-        - name: EXECUTIONS_PROCESS
-          value: "main"  
+        # - name: EXECUTIONS_PROCESS
+        #   value: "main"  
         ports:
         - containerPort: 5678
         volumeMounts:
