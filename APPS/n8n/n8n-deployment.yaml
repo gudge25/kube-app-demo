@@ -29,6 +29,8 @@ spec:
           value: "Europe/Warsaw"
         - name: WEBHOOK_URL
           value: "https://n8n.lab.gixo.co.uk/"
+        - name: DB_SQLITE_BUSY_TIMEOUT
+          value: "10000"  # This sets a 10-second timeout for SQLite  
         ports:
         - containerPort: 5678
         volumeMounts:
