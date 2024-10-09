@@ -14,6 +14,13 @@ spec:
       labels:
         app: n8n
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist  # Ensure the node does not have the control-plane role
       containers:
       - name: n8n
         image: n8nio/n8n:1.61.0
