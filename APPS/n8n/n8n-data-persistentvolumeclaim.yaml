@@ -4,7 +4,7 @@ metadata:
   name: n8n-pvc
 spec:
   accessModes:
-    - ReadWriteMany # Allows multiple pods to read/write
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
