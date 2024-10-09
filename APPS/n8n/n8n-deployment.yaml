@@ -1,46 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f n8n.yaml
-    kompose.version: 1.33.0 (HEAD)
+  name: n8n-deployment
   labels:
-    io.kompose.service: n8n
-  name: n8n
+    app: n8n
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: n8n
-  strategy:
-    type: Recreate
+      app: n8n
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -f n8n.yaml
-        kompose.version: 1.33.0 (HEAD)
       labels:
-        io.kompose.network/n8n-default: "true"
-        io.kompose.service: n8n
+        app: n8n
     spec:
       containers:
-        - image: docker.n8n.io/n8nio/n8n
-          name: n8n
-          securityContext:
-            runAsUser: 1000 # Assuming 1000 is the appropriate UID for the process inside the container
-          ports:
-            - containerPort: 5678
-              protocol: TCP
-          stdin: true
-          tty: true
-          # volumeMounts:
-          #   - mountPath: /home/node/.n8n
-          #     name: n8n-data
-          #     readOnly: false # Set to true if appropriate
-      restartPolicy: Always
-      # volumes:
-      #   - name: n8n-data
-      #     persistentVolumeClaim:
-      #       claimName: n8n-data
-      #     # Optionally, you can specify volume permissions here
-      #     # volumeMode: "0700" # Example permissions
+      - name: n8n
+        image: n8nio/n8n:1.59.4
+        resources:
+          limits:
+            memory: "512Mi"
+          requests:
+            memory: "320Mi"
+        env:
+        - name: N8N_SECURE_COOKIE
+          value: "false"
+        - name: TZ
+          value: "Europe/Warsaw"
+        - name: WEBHOOK_URL
+          value: "https://n8n.lab.gixo.co.uk/"
+        ports:
+        - containerPort: 5678
+        volumeMounts:
+        - name: n8n-data
+          mountPath: /home/node/.n8n
+      volumes:
+      - name: n8n-data
+        persistentVolumeClaim:
+          claimName: n8n-pvc
