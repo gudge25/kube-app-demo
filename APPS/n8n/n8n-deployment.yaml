@@ -31,13 +31,13 @@ spec:
             memory: "320Mi"
         env:
         - name: N8N_SECURE_COOKIE
+          value: "true"
+        - name: N8N_PERSONALIZATION_ENABLED
           value: "false"
         - name: TZ
           value: "Europe/Warsaw"
         - name: WEBHOOK_URL
-          value: "https://n8n.lab.gixo.co.uk/"
-        # - name: EXECUTIONS_PROCESS
-        #   value: "main"  
+          value: "https://api.lab.gixo.co.uk/" 
         ports:
         - containerPort: 5678
         volumeMounts:
