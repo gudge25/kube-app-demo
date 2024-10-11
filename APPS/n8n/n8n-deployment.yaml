@@ -23,7 +23,7 @@ spec:
                 operator: DoesNotExist  # Ensure the node does not have the control-plane role
       containers:
       - name: n8n
-        image: n8nio/n8n:1.61.0
+        image: n8nio/n8n:1.62.4
         resources:
           limits:
             memory: "512Mi"
