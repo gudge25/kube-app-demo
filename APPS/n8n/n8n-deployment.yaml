@@ -38,7 +38,7 @@ spec:
           value: "true"
         - name: N8N_PUBLIC_API_SWAGGERUI_DISABLED
           value: "true"   
-        - name: N8N_HIDE_HIDE_GITHUB_STAR_BUTTON
+        - name: N8N_HIDE_GITHUB_STAR_BUTTON
           value: "true"
         - name: TZ
           value: "Europe/Warsaw"
