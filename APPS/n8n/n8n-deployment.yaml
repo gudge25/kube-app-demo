@@ -43,7 +43,9 @@ spec:
         - name: TZ
           value: "Europe/Warsaw"
         - name: WEBHOOK_URL
-          value: "https://api.lab.gixo.co.uk/" 
+          value: "https://api.lab.gixo.co.uk/"
+        - name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+          value: "true"
         ports:
         - containerPort: 5678
         volumeMounts:
