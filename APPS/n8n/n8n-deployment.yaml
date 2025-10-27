@@ -55,6 +55,16 @@ spec:
         volumeMounts:
         - name: n8n-data
           mountPath: /home/node/.n8n
+        livenessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'ls /home/node/.n8n >/dev/null 2>&1 || exit 1'
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3  
       volumes:
       - name: n8n-data
         persistentVolumeClaim:
