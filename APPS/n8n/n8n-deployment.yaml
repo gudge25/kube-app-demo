@@ -32,6 +32,8 @@ spec:
         env:
         - name: N8N_SECURE_COOKIE
           value: "true"
+        - name: QUEUE_HEALTH_CHECK_ACTIVE
+          value: "true"  
         - name: DB_SQLITE_POOL_SIZE
           value: "0"
         - name: N8N_RUNNERS_ENABLED
