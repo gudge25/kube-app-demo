@@ -33,7 +33,7 @@ spec:
         - name: N8N_SECURE_COOKIE
           value: "true"
         - name: DB_SQLITE_POOL_SIZE
-          value: "2"
+          value: "1"
         - name: N8N_RUNNERS_ENABLED
           value: "true"
         - name: N8N_PERSONALIZATION_ENABLED
