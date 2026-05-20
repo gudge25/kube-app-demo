@@ -17,3 +17,27 @@ helm install rancher rancher-latest/rancher   --namespace cattle-system   --set 
 /usr/local/bin/k3s-agent-uninstall.sh  (Optional)
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.28.9+k3s1 K3S_URL=https://IP.oraclevcn.com:6443 K3S_TOKEN=12345678 sh -
 ```
+
+
+# Usefull helm
+
+### Goldilocks - viewing resource recommendations in your Kubernetes cluster
+
+depends on ```https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/charts/vertical-pod-autoscaler```
+<img width="1521" height="671" alt="image" src="https://github.com/user-attachments/assets/aaef6043-1164-4b19-87e3-7088a803f69d" />
+
+
+### Kyverno - Unified Policy as Code
+
+### Cast AI  - Application performance
+
+### Trivy - The All-in-One Security Scanner
+
+### Falco - Runtime security.
+
+### Velero - Cluster backups
+
+### LitmusChaos - Simulate failures
+
+### Kube-hunter - security assessment and penetration testing tool for Kubernetes clusters
+
