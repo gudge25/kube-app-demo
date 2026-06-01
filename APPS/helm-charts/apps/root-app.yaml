@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/gudge25/kube-app-demo
+    repoURL: https://github.com/gudge25/kube-app-demo.git
     targetRevision: HEAD
     path: APPS/helm-charts/apps
     directory:
