@@ -11,7 +11,7 @@ spec:
       targetRevision: "24.1.11"
       helm:
         valueFiles:
-          - $values/apps/wordpress/values.yaml
+          - $values/APPS/helm-charts/apps/wordpress/values.yaml
     - repoURL: https://github.com/gudge25/kube-app-demo.git
       targetRevision: HEAD
       ref: values
