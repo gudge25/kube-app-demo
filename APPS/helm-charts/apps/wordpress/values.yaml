@@ -1,5 +1,5 @@
-wordpress:
-  wordpressUsername: admin
-  wordpressPassword: changeme
-  service:
-    type: ClusterIP
+# wordpress:
+#   wordpressUsername: admin
+#   wordpressPassword: changeme
+#   service:
+#     type: ClusterIP
