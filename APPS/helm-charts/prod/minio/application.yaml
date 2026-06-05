@@ -3,11 +3,6 @@ kind: Application
 metadata:
   name: minio
   namespace: argo-cd
-  annotations:
-    #Description:
-    description: "S3-compatible object storage"
-    # Doc
-    docs: "https://min.io/docs"
 spec:
   project: default
   sources:
@@ -23,6 +18,9 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: minio
+  info:
+    - name: URL
+      value: https://www.min.io/
   syncPolicy:
     automated:
       prune: true
