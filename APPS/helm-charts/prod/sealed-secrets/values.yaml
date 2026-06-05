@@ -1,2 +1,1 @@
-image:
-  repository: bitnamilegacy/sealed-secrets-controller
+namespace: sealed-secrets
