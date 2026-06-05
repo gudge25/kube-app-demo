@@ -13,3 +13,7 @@ image:
 volumePermissions:
   image:
     repository: bitnamilegacy/rabbitmq
+
+auth:
+  existingSecret: rabbitmq
+  updatePassword: false
