@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gotenberg
+  namespace: argo-cd
+spec:
+  project: default
+  sources:
+    - repoURL: https://maikumori.github.io/helm-charts
+      chart: gotenberg
+      targetRevision: "1.21.0"
+      helm:
+        valueFiles:
+          - $values/APPS/helm-charts/prod/gotenberg/values.yaml
+    - repoURL: https://github.com/gudge25/kube-app-demo.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gotenberg
+  info:
+    - name: URL
+      value: https://maikumori.github.io/helm-charts
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
