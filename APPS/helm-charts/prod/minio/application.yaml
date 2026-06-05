@@ -8,6 +8,10 @@ spec:
   sources:
     - repoURL: https://charts.bitnami.com/bitnami
       chart: minio
+      name: minio
+      labels:
+        app.kubernetes.io/instance: minio
+        app.kubernetes.io/name: minio
       targetRevision: "16.0.10"
       helm:
         valueFiles:
