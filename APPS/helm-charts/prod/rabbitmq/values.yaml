@@ -1,0 +1,15 @@
+namespace: rabbitmq
+global:
+  security:
+    allowInsecureImages: true
+
+persistence:
+  size: 1Gi
+  storageClass: "longhorn"
+
+image:
+  repository: bitnamilegacy/rabbitmq
+
+volumePermissions:
+  image:
+    repository: bitnamilegacy/rabbitmq
