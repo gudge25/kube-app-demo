@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/gudge25/kube-app-demo.git
+    targetRevision: HEAD
+    path: APPS/helm-charts/prod
+    directory:
+      recurse: true
+      include: "*/application.yaml"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
