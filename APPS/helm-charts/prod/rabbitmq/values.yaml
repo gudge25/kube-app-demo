@@ -3,7 +3,7 @@ global:
   security:
     allowInsecureImages: true
 
-# Storage configuration
+# Storage Longhorn
 persistence:
   size: 1Gi
   storageClass: "longhorn"
