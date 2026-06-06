@@ -1,18 +1,19 @@
-namespace: rabbitmq
-# global:
-#   security:
-#     allowInsecureImages: true
+global:
+  security:
+    allowInsecureImages: true
 
-# persistence:
-#   size: 1Gi
-#   storageClass: "longhorn"
+persistence:
+  size: 1Gi
+  storageClass: "longhorn"
 
 image:
   repository: bitnamilegacy/rabbitmq
 
-volumePermissions:
-  image:
-    repository: bitnamilegacy/rabbitmq
+# volumePermissions:
+#   image:
+#     repository: bitnamilegacy/rabbitmq
 
 # auth:
-#   updatePassword: false
+#   username: user
+#   password: '' # If you want to use a custom password, set this to a non-empty value. The password will be stored in a Kubernetes secret.
+#   erlangCookie: '' # If you want to use a custom Erlang cookie, set this to a non-empty value. The cookie will be stored in a Kubernetes secret.

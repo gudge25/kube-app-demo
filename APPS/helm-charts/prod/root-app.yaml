@@ -19,3 +19,9 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+# WARNING!!!:
+# Expected to have 3 applications:
+# Argo CD in namespace argo-cd
+# Longhorn in namespace longhorn-system
+# Sealed Secrets in namespace sealed-secrets.
