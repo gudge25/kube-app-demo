@@ -16,4 +16,4 @@ volumePermissions:
 
 auth:
   existingSecret: rabbitmq
-  updatePassword: true
+  updatePassword: false
