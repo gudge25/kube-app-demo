@@ -7,12 +7,12 @@ namespace: rabbitmq
 #   size: 1Gi
 #   storageClass: "longhorn"
 
-# image:
-#   repository: bitnamilegacy/rabbitmq
+image:
+  repository: bitnamilegacy/rabbitmq
 
-# volumePermissions:
-#   image:
-#     repository: bitnamilegacy/rabbitmq
+volumePermissions:
+  image:
+    repository: bitnamilegacy/rabbitmq
 
 # auth:
 #   updatePassword: false
