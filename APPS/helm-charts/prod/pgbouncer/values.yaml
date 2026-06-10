@@ -1,0 +1,18 @@
+config:
+  existingAdminSecret: pgbouncer-admin-secret
+  existingUserlistSecret: pgbouncer-userlist-secret
+
+  # databases:
+  #   "*":
+  #     host: HOSTNAME
+  #     port: 21274
+
+  pgbouncer:
+    pool_mode: session
+    max_client_conn: 500
+    default_pool_size: 15
+    reserve_pool_size: 2
+    max_db_connections: 18
+    server_tls_sslmode: require
+    server_reset_query: DISCARD ALL
+    server_idle_timeout: 120

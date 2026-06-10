@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgbouncer
+  namespace: argo-cd
+spec:
+  project: default
+  sources:
+    - repoURL: https://icoretech.github.io/helm
+      chart: pgbouncer
+      targetRevision: "4.1.7"
+      helm:
+        valueFiles:
+          - $values/APPS/helm-charts/prod/pgbouncer/values.yaml
+    - repoURL: https://github.com/gudge25/kube-app-demo.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pgbouncer
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
