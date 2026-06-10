@@ -15,6 +15,9 @@ spec:
     - repoURL: https://github.com/gudge25/kube-app-demo.git
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/gudge25/kube-app-demo.git
+      targetRevision: HEAD
+      path: APPS/helm-charts/prod/pgbouncer/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: pgbouncer
