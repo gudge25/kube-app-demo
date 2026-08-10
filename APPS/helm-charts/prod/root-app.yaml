@@ -25,3 +25,22 @@ spec:
 # Argo CD in namespace argo-cd
 # Longhorn in namespace longhorn-system
 # Sealed Secrets in namespace sealed-secrets.
+
+db:
+  type: postgresdb
+postgresql:
+  enabled: true
+redis:
+  enabled: true
+worker:
+  mode: queue
+webhook:
+  mode: queue
+
+ingress:
+  enabled: true
+  hosts:
+    - host: n8n.ie.asteriskukraine.com
+      paths:
+        - path: /
+          pathType: Prefix

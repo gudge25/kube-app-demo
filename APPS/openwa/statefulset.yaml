@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: openwa
+  namespace: openwa
+spec:
+  serviceName: openwa
+  replicas: 1 # MUST stay 1 until session-claim is implemented (H1/H11) — see the warning at the top of this guide
+  selector:
+    matchLabels:
+      app: openwa
+  template:
+    metadata:
+      labels:
+        app: openwa
+    spec:
+      containers:
+        - name: openwa
+          image: ghcr.io/rmyndharis/openwa:0.12.1
+          ports:
+            - containerPort: 2785
+              name: http
+          envFrom:
+            - configMapRef:
+                name: openwa-config
+            - secretRef:
+                name: openwa-secrets
+          env:
+            - name: NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: openwa-data
+              mountPath: /app/data
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 2785
+            initialDelaySeconds: 90
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health/ready
+              port: 2785
+            initialDelaySeconds: 10
+            periodSeconds: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: openwa-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
