@@ -13,6 +13,7 @@ data:
   ENABLE_SWAGGER: "true"
   SIMULATE_TYPING: "true"
   AUDIT_RETENTION_DAYS: "10"
+  MESSAGE_RETENTION_DAYS: "90"
 
   DATABASE_HOST: "pgbouncer.pgbouncer.svc.cluster.local"
   DATABASE_NAME: "openwa"
