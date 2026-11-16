@@ -15,6 +15,12 @@ spec:
       labels:
         app: openwa
     spec:
+      # Make the PVC writable by the in-container `openwa` user (uid/gid 997).
+      # OnRootMismatch: kubelet only re-owns the volume when its root dir is wrong,
+      # instead of recursively chown-ing every file in /app/data on every mount.
+      securityContext:
+        fsGroup: 997
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: openwa
           image: ghcr.io/rmyndharis/openwa:0.30.0
