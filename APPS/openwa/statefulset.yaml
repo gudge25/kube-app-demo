@@ -37,6 +37,21 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+          # Container-level hardening (mirrors upstream's reference StatefulSet).
+          # readOnlyRootFilesystem: every writable path must be a mounted volume:
+          # /app/data (PVC) and /tmp (emptyDir below).
+          # The image entrypoint starts as root to chown /app/data, then drops to the
+          # `openwa` user (uid/gid 997) via gosu, so those capabilities are added back:
+          #   CHOWN               chown /app/data
+          #   DAC_OVERRIDE/FOWNER root must bypass file permission/ownership checks on the volume
+          #   SETUID/SETGID       gosu privilege drop
+          #   KILL                signal forwarding to the child process
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+              add: ["CHOWN", "DAC_OVERRIDE", "FOWNER", "KILL", "SETGID", "SETUID"]
           resources:
             requests:
               memory: "512Mi"
@@ -47,6 +62,8 @@ spec:
           volumeMounts:
             - name: openwa-data
               mountPath: /app/data
+            - name: tmp
+              mountPath: /tmp
           livenessProbe:
             httpGet:
               path: /api/health
@@ -59,6 +76,10 @@ spec:
               port: 2785
             initialDelaySeconds: 10
             periodSeconds: 5
+      volumes:
+        # Scratch space for the read-only root filesystem (wiped on every pod restart).
+        - name: tmp
+          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: openwa-data
