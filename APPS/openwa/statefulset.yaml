@@ -15,6 +15,10 @@ spec:
       labels:
         app: openwa
     spec:
+      # OpenWA's teardown can take up to ~63 s with every datastore enabled (upstream's
+      # shutdown budget). Kubernetes' default grace period is 30 s, so a slow stop would be
+      # SIGKILLed half way through. 75 s matches upstream's reference StatefulSet.
+      terminationGracePeriodSeconds: 75
       # Make the PVC writable by the in-container `openwa` user (uid/gid 997).
       # OnRootMismatch: kubelet only re-owns the volume when its root dir is wrong,
       # instead of recursively chown-ing every file in /app/data on every mount.
