@@ -10,7 +10,16 @@ data:
   AUTO_START_SESSIONS: "true"
   MEDIA_DOWNLOAD_ENABLED: "false"
   SEARCH_ENABLED: "false"
-  ENABLE_SWAGGER: "true"
+  ENABLE_SWAGGER: "false"
+  # Traffic arrives via cloudflared (a Deployment, so its pod IP changes on restart), which
+  # connects from a pod IP and forwards the real client in X-Forwarded-For. OpenWA only honours
+  # that header when the direct peer matches this list, so it must cover the cloudflared pod.
+  # 10.42.0.0/16 is the k3s default pod CIDR: confirm with
+  #   kubectl -n cloudflared get pod -o wide   (the IP must fall inside this range)
+  # Comma-separated IPs/CIDRs. A value that does not match is harmless: the header is ignored,
+  # exactly as before. Keep it as narrow as the cluster allows, because any peer in this range
+  # can assert an arbitrary client IP.
+  TRUSTED_PROXIES: "10.42.0.0/16"
   SIMULATE_TYPING: "true"
   AUDIT_RETENTION_DAYS: "10"
   MESSAGE_RETENTION_DAYS: "14"
